@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {FaInstagram, FaLinkedin, FaYoutube} from "react-icons/fa";
+import "./App.css";
 
 const Home = () =>{
      return(<>
@@ -231,6 +232,7 @@ const Home = () =>{
    <br></br>
    <br></br>
              <div className="Footer-suscribe">
+              
                 <h3>Subscribe to get updates.</h3>
                 <form action="#">
                   <input

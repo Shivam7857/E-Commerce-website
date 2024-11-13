@@ -5,7 +5,6 @@ import Mens from "./Mens";
 import Kids from "./Kids";
 import Services from "./Services";
 import Login from "./Login";
-import Cart from "./Cart";
 import Navbar from "./Navbar";
 
 import './index.css';
@@ -23,7 +22,8 @@ const App = () =>{
     <Route path="/Kids" element={<Kids></Kids>}/>
     <Route path="/Services" element={<Services></Services>}/>
     <Route path="/Login" element={<Login></Login>}/>
-    <Route path="/Cart" element={<Cart></Cart>}/>
+    
+  
   </Routes>
   
      

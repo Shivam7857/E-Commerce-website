@@ -1,101 +1,52 @@
-
-import React, { useState } from "react";
-import './Login.css';
-
-export default function (props) {
-  let [authMode, setAuthMode] = useState("signin")
-
-  const changeAuthMode = () => {
-    setAuthMode(authMode === "signin" ? "signup" : "signin")
-  }
-
-  if (authMode === "signin") {
+import React from "react";
+import "./Login.css";
+import Swal from 'sweetalert2'
+const Login =()=> {
+    const onSubmit = async (event) => {
+        event.preventDefault();
+        const formData = new FormData(event.target);
+    
+        formData.append("access_key", "c2eadce3-ff0e-4d8d-b3c3-acb2929c515a");
+    
+        const object = Object.fromEntries(formData);
+        const json = JSON.stringify(object);
+    
+        const res = await fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json"
+          },
+          body: json
+        }).then((res) => res.json());
+    
+        if (res.success) {
+            Swal.fire({
+                title: "Success!",
+                text: "You are Logined!",
+                icon: "success"
+              });
+        }
+      };
     return (
-      <div className="Auth-form-container">
-        <form className="Auth-form">
-          <div className="Auth-form-content">
-            <h3 className="Auth-form-title">Sign In</h3>
-            <div className="text-center">
-              Not registered yet?{" "}
-              <span className="link-primary" onClick={changeAuthMode}>
-                Sign Up
-              </span>
-            </div>
-            <div className="form-group mt-3">
-              <label>Email address</label>
-              <input
-                type="email"
-                className="form-control mt-1"
-                placeholder="Enter email"
-              />
-            </div>
-            <div className="form-group mt-3">
-              <label>Password</label>
-              <input
-                type="password"
-                className="form-control mt-1"
-                placeholder="Enter password"
-              />
-            </div>
-            <div className="d-grid gap-2 mt-3">
-              <button type="submit" className="btn btn-primary">
-                Submit
-              </button>
-            </div>
-            <p className="text-center mt-2">
-              Forgot <a href="#">password?</a>
-            </p>
-          </div>
-        </form>
-      </div>
+        <section className="Contact">
+            <form onSubmit= {onSubmit}>
+                <h2>Login Page</h2>
+                <label>Full Name</label>
+                <div className="input-box">
+                    <input type="text"className="field" placeholder ="Enter your name" name='name' required/>
+                </div>
+                <div className="input-box">
+                    <label>Email Address</label>
+                    <input type="email"className="field" placeholder ="Enter your email" name='name' required/>
+                    </div>
+                    <div className="input-box">
+                        <label>Contact No.</label>
+                     <input type="number"className="field" placeholder ="Enter your number" name='name' required/>
+                    </div>
+                    <button type="submit">Login</button>
+            </form>
+        </section>
     )
-  }
-
-  return (
-    <div className="Auth-form-container">
-      <form className="Auth-form">
-        <div className="Auth-form-content">
-          <h3 className="Auth-form-title">Sign In</h3>
-          <div className="text-center">
-            Already registered?{" "}
-            <span className="link-primary" onClick={changeAuthMode}>
-              Sign In
-            </span>
-          </div>
-          <div className="form-group mt-3">
-            <label>Full Name</label>
-            <input
-              type="text"
-              className="form-control mt-1"
-              placeholder="e.g Aryan"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Email address</label>
-            <input
-              type="email"
-              className="form-control mt-1"
-              placeholder="Email Address"
-            />
-          </div>
-          <div className="form-group mt-3">
-            <label>Password</label>
-            <input
-              type="password"
-              className="form-control mt-1"
-              placeholder="Password"
-            />
-          </div>
-          <div className="d-grid gap-2 mt-3">
-            <button type="submit" className="btn btn-primary">
-              Submit
-            </button>
-          </div>
-          <p className="text-center mt-2">
-            Forgot <a href="#">password?</a>
-          </p>
-        </div>
-      </form>
-    </div>
-  )
 }
+export default Login;
